@@ -39,7 +39,7 @@ int main()
 	pilhaImpar = init();
     
     int ant=0, num=0;
-    for(int a = 0; a < MAX; a++)//pega 1 separado
+    for(int a = 0; a < MAX; a++)
     {
         if(a==0) cout<<"Digite o primeiro número: ";
         else cout<<"Digite o "<<a+1<<"° número, e maior que o anterior: ";
