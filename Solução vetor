@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#define MAX 5
+#define MAX 30
 
 struct Pilha {
 	int qtde;
