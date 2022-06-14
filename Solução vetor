@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+#define MAX 30
+
+struct Pilha {
+	int qtde;
+	int elementos[MAX];
+};
+
+Pilha* init() {
+	Pilha *p = new Pilha;
+	p->qtde = 0;
+	return p;
+};
+
+
+int push(Pilha *p, float v) {
+	int podeEmpilhar = (p->qtde < MAX);
+	if (podeEmpilhar) {
+		p->elementos[p->qtde++] = v;
+	}
+	return podeEmpilhar;
+}
+
+void print(Pilha *p) {
+	cout << endl << "Números:" << endl << endl;
+	for(int i = p->qtde-1; i>=0; --i) {
+		cout << p->elementos[i] << endl;
+	}
+	cout << "------" << endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Portuguese");
+    
+    Pilha *pilhaPar, *pilhaImpar;
+	pilhaPar = init();
+	pilhaImpar = init();
+    int ant, num, a=0;
+    int vetor[MAX];
+    
+    while(a<MAX)
+    {
+        if(a==0) cout<<"Digite o primeiro número: ";
+        else cout<<"Digite o "<<a+1<<"° número, e maior que o anterior: ";
+        cin>>num;
+        if(num>ant) 
+        {
+            vetor[a]=num;
+            ++a;
+            if (num % 2 == 0) 
+            {
+        		push(pilhaPar, num);
+        	} 
+        	else {
+        	push(pilhaImpar, num);
+        	}
+            ant=vetor[a-1];	
+        } else {
+            cout<<"Atenção, tente novamente!"<<endl;   
+        }
+        ant=num;
+    }
+    cout<<endl;
+    cout<<"Pilha par";
+    print(pilhaPar);
+    cout<<"Pilha impar";
+    print(pilhaImpar);
+    
+    return 0;
+}
