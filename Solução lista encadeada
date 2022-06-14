@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+#define MAX 30
+
+struct No {
+	float dado;
+	No *prox;
+};
+
+struct Pilha
+{
+	No *topo;
+};
+
+Pilha* init() {
+	Pilha *p = new Pilha;
+	p->topo = NULL;
+	return p;
+}
+
+void push(Pilha *p, float v) {
+	No *no = new No;
+	no->dado = v;
+	no->prox = p->topo;
+	p->topo = no;
+}
+
+void print(Pilha *p) {
+	No *no;
+	no = p->topo;
+	cout << endl << "Números: " << endl;
+	while (no != NULL) {
+		cout << no->dado << endl;
+		no = no->prox;
+	}
+	cout << "------" << endl<<endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Portuguese");
+    
+    Pilha *pilhaPar, *pilhaImpar;
+	pilhaPar = init();
+	pilhaImpar = init();
+    
+    int ant=0, num=0;
+    for(int a = 0; a < MAX; a++)
+    {
+        if(a==0) cout<<"Digite o primeiro número: ";
+        else cout<<"Digite o "<<a+1<<"° número, e maior que o anterior: ";
+        cin>>num;
+        if(a==0) ant=num-1;
+        
+        if(num>ant) 
+        {
+            if (num % 2 == 0) {
+        		push(pilhaPar, num);
+        	} 
+        	else {
+        	    push(pilhaImpar, num);
+        	}
+            ant=num;	
+        }   else {
+                cout<<"Atenção, tente novamente!"<<endl;
+            a--;
+            }
+        ant=num;
+    }
+    
+    cout<<endl;
+    cout<<"Pilha par";
+    print(pilhaPar);
+    cout<<"Pilha impar";
+    print(pilhaImpar);
+    
+    return 0;
+}
